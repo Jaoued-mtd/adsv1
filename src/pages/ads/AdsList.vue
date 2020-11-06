@@ -20,13 +20,13 @@
 <script>
 import AdsItem from "../../components/ads/AdsItem";
 export default {
-  props: ["cardRowOrCol"],
+  props: ["number"],
   components: {
     AdsItem,
   },
   computed: {
     ads() {
-      return this.$store.getters["ads/ads"];
+      return this.$store.getters["ads/ads"].slice(0, this.number);
     },
   },
   methods: {

@@ -7,7 +7,8 @@
         </h1>
       </div>
     </div>
-    <AdsList />
+    <h1 class="text-center mt-5">Produits Populaires</h1>
+    <AdsList number="3" />
   </div>
 </template>
 <script>
