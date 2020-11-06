@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="">
     <!-- Navigation  -->
     <TheHeader />
     <router-view></router-view>
@@ -12,6 +12,10 @@ export default {
   name: "App",
   components: {
     TheHeader,
+  },
+  created() {
+    this.$store.dispatch("tryLogin");
+    this.$store.dispatch("users/loadUsers");
   },
 };
 </script>

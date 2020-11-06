@@ -1,9 +1,11 @@
 <template>
-  <button v-if="!link" :class="'btn  ' + mode">
+  <button v-if="!link" :class="'btn m-1  ' + mode">
     {{ title }}
+    <slot></slot>
   </button>
-  <router-link v-else :to="to" :class="'btn text-light ' + mode">
+  <router-link v-else :to="to" :class="'btn m-1 text-light ' + mode">
     {{ title }}
+    <slot></slot>
   </router-link>
 </template>
 <script>

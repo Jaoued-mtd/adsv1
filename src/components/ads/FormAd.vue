@@ -55,6 +55,11 @@ export default {
       price: null,
     };
   },
+  computed: {
+    userMe() {
+      return this.$store.getters["users/userMe"];
+    },
+  },
   methods: {
     submitForm() {
       const formData = {
@@ -62,7 +67,10 @@ export default {
         description: this.description,
         categorie: this.categorie,
         price: this.price,
-        userId: "007",
+        userId: this.$store.state.userId,
+        username: this.userMe[0].username,
+        email: this.userMe[0].email,
+        phone: this.userMe[0].phone,
       };
       this.$emit("save-data", formData);
     },

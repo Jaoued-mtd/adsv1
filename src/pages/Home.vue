@@ -7,8 +7,17 @@
         </h1>
       </div>
     </div>
+    <AdsList />
   </div>
 </template>
+<script>
+import AdsList from "./ads/AdsList";
+export default {
+  components: {
+    AdsList,
+  },
+};
+</script>
 <style>
 .hero-section {
   background: url(https://images.unsplash.com/photo-1515676724626-c0290fe4cf6f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80)
