@@ -1,5 +1,6 @@
 <template>
   <h1>Voici les annonces</h1>
+
   <ul>
     <AdsItem
       v-for="ad in ads"

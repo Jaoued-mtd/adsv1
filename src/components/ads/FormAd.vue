@@ -62,7 +62,7 @@ export default {
         description: this.description,
         categorie: this.categorie,
         price: this.price,
-        userId: "007",
+        userId: this.$store.state.userId,
       };
       this.$emit("save-data", formData);
     },

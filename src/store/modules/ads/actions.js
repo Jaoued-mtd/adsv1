@@ -35,8 +35,6 @@ export default {
     }
     const ads = [];
 
-    console.log(responseData);
-
     for (const key in responseData) {
       const ad = {
         id: key,

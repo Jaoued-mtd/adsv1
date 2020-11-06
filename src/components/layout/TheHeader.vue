@@ -26,12 +26,17 @@
           >
         </li>
       </ul>
-      <span class="navbar-text mb-1 ml-5 mr-5 text-success">
+      <span class="navbar-text mb-1 ml-5 mr-5" v-if="isLoggedIn">
         <BaseButton
           link
           to="/create"
           mode="btn-success"
           title="Creer votre annonce"
+        ></BaseButton>
+        <BaseButton
+          @click="logout"
+          mode="btn-danger"
+          title="Deconnexion"
         ></BaseButton>
       </span>
     </div>
@@ -39,6 +44,17 @@
 </template>
 <script>
 export default {
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.replace("/");
+    },
+  },
   data() {
     return {
       links: [
@@ -49,6 +65,10 @@ export default {
         {
           name: "Annonces",
           route: "/annonces",
+        },
+        {
+          name: "Connexion",
+          route: "/auth",
         },
         {
           name: "Profil",
