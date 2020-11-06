@@ -7,6 +7,9 @@ export default {
       categorie: payload.categorie,
       price: payload.price,
       userId: payload.userId,
+      phone: payload.phone,
+      username: payload.username,
+      email: payload.email,
     };
 
     const response = await fetch(`https://peche-app.firebaseio.com/ads.json`, {
@@ -42,6 +45,10 @@ export default {
         description: responseData[key].description,
         categorie: responseData[key].categorie,
         price: responseData[key].price,
+        userId: responseData[key].userId,
+        phone: responseData[key].phone,
+        username: responseData[key].username,
+        email: responseData[key].email,
       };
       ads.push(ad);
     }

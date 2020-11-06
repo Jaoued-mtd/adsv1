@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ $store.state.auth.userId }}
     <BaseButton
       @click="setSelectedComponent('LoginForm')"
       title="Login"
