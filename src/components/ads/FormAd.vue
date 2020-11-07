@@ -40,7 +40,7 @@
         v-model.number="price"
       />
     </div>
-    <button type="submit" class="btn btn-success">Creer</button>
+    <button type="submit" class="btn blue">Creer</button>
   </form>
 </template>
 

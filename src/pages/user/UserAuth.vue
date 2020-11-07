@@ -1,16 +1,15 @@
 <template>
   <div>
-    <BaseButton
-      @click="setSelectedComponent('LoginForm')"
-      title="Login"
-      mode="btn-success"
-    />
-    <BaseButton
-      @click="setSelectedComponent('RegisterForm')"
-      title="Register"
-      mode="btn-outline-success"
-    />
-    <component :is="isSelected"></component>
+    <div class="grid">
+      <div class="row">
+        <div class="col-lg-6">
+          <LoginForm />
+        </div>
+        <div class="col-lg-6">
+          <RegisterForm />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -22,9 +21,7 @@ export default {
     RegisterForm,
   },
   data() {
-    return {
-      isSelected: "RegisterForm",
-    };
+    return {};
   },
   methods: {
     setSelectedComponent(cmp) {
