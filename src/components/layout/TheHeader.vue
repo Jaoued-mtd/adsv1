@@ -47,7 +47,7 @@
       <span class="navbar-text mb-1 ml-5">
         <router-link
           class="btn blue text-light mr-3 cursor"
-          to="/auth"
+          to="/login"
           v-if="!isLoggedIn"
           ><svg
             width="1.5em"
@@ -99,7 +99,7 @@
     </div>
   </div>
   <form
-    v-if="this.$route.path != '/annonces'"
+    v-if="this.$route.path === '/'"
     class="d-flex justify-content-around pt-3 pb-3 pl-5 pr-5"
     @submit.prevent="formSubmit"
   >

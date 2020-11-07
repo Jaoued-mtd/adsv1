@@ -1,15 +1,15 @@
 <template>
-  <BaseCard>
-    <h3>Creez votre première annonce</h3>
-    <FormAd @save-data="saveData" />
-  </BaseCard>
+  <h3 class="text-center font-weight-light mt-5">
+    Creez votre première annonce
+  </h3>
+  <AdForm @save-data="saveData" />
 </template>
 
 <script>
-import FormAd from "../../components/ads/FormAd";
+import AdForm from "../../components/ads/AdForm";
 export default {
   components: {
-    FormAd,
+    AdForm,
   },
   methods: {
     saveData(data) {

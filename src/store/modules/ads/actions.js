@@ -1,13 +1,10 @@
-var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
 export default {
   // creer une annonce
 
   async createAd(context, payload) {
-    myHeaders.append(
-      "Authorization",
-      `Bearer ${localStorage.getItem("token")}`
-    );
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${context.rootGetters.token}`);
     const adData = {
       title: payload.title,
       description: payload.description,
@@ -16,6 +13,7 @@ export default {
       userId: payload.userId,
     };
 
+    console.log(context.rootGetters.token);
     const response = await fetch(`http://localhost:1337/ads`, {
       method: "POST",
       body: JSON.stringify(adData),

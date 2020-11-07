@@ -2,7 +2,7 @@
   <AdsList />
 </template>
 <script>
-import AdsList from "./AdsList";
+import AdsList from "../../components/ads/AdsList";
 export default {
   components: {
     AdsList,

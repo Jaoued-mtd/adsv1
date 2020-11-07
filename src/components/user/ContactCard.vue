@@ -22,6 +22,7 @@
           </div>
 
           <a
+            v-if="this.$route.path != '/profil'"
             :href="'mailto:' + email"
             class="btn blue-bg text-light mt-3 btn-rounded waves-effect w-md waves-light"
           >
