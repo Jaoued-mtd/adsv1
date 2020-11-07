@@ -26,7 +26,17 @@ export default {
   },
   computed: {
     ads() {
-      return this.$store.getters["ads/ads"].slice(0, this.number);
+      if (this.$route.query.search) {
+        return this.$store.getters["ads/ads"]
+          .slice(0, this.number)
+          .filter((item) =>
+            item.title
+              .toLowerCase()
+              .includes(this.$route.query.search.toLowerCase())
+          );
+      } else {
+        return this.$store.getters["ads/ads"].slice(0, this.number);
+      }
     },
   },
   methods: {
@@ -41,6 +51,7 @@ export default {
 
   created() {
     this.loadAds();
+    console.log(this.$route.query.test);
   },
 };
 </script>

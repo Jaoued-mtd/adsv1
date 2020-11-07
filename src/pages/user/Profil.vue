@@ -1,6 +1,6 @@
 <template>
   <div class="container pt-5">
-    <h1>Bienvenue sur ton espace {{ userMe[0].username }} !</h1>
+    <h1>Bienvenue sur ton espace {{ userMe.username }} !</h1>
     <BaseCard>
       <div class="row no-gutters">
         <div class="col-md-4">
@@ -13,9 +13,9 @@
         </div>
         <div class="col-md-8 border-left">
           <div class="card-body">
-            <h3 class="card-title">{{ userMe[0].username }}</h3>
-            <h5 class="card-price">{{ userMe[0].email }}</h5>
-            <p class="card-text">{{ userMe[0].phone }}</p>
+            <h3 class="card-title">{{ userMe.username }}</h3>
+            <h5 class="card-price">{{ userMe.email }}</h5>
+            <p class="card-text">{{ userMe.phone }}</p>
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
 export default {
   computed: {
     userMe() {
-      return this.$store.getters["users/userMe"];
+      return this.$store.getters["users/users"];
     },
   },
 };
