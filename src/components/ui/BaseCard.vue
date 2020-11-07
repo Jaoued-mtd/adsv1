@@ -1,7 +1,7 @@
 <template>
   <div
     class="card p-3 shadow"
-    :style="'width:' + size + 'rem; margin:5rem auto'"
+    :style="'width:' + size + 'rem; margin:5rem auto;'"
   >
     <slot></slot>
   </div>

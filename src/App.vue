@@ -3,15 +3,19 @@
     <!-- Navigation  -->
     <TheHeader />
     <router-view></router-view>
+    <TheFooter />
   </div>
 </template>
 
 <script>
 import TheHeader from "./components/layout/TheHeader";
+import TheFooter from "./components/layout/TheFooter";
+
 export default {
   name: "App",
   components: {
     TheHeader,
+    TheFooter,
   },
   created() {
     this.$store.dispatch("tryLogin");
@@ -34,11 +38,11 @@ export default {
   cursor: pointer;
 }
 
-.green {
-  color: #1aa339;
+.blue {
+  color: #0098d4 !important;
 }
 
-.green-bg {
-  background: #1aa339;
+.blue-bg {
+  background: #0098d4 !important;
 }
 </style>

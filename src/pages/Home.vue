@@ -1,13 +1,12 @@
 <template>
   <div class="hero">
-    <div class="hero-section">
-      <div class="hero-text">
-        <h1 class="text-light">
-          Vos articles de <span class="green">peche</span> d'occasion
-        </h1>
+    <div class="hero-section"></div>
+    <div class="popular container">
+      <div class="d-flex justify-content-between m-5">
+        <h4 class="">Articles Populaires</h4>
+        <router-link to="/annonces" class="blue">Voir tout</router-link>
       </div>
     </div>
-    <h1 class="text-center mt-5">Produits Populaires</h1>
     <AdsList number="3" />
   </div>
 </template>
@@ -21,12 +20,13 @@ export default {
 </script>
 <style>
 .hero-section {
-  background: url(https://images.unsplash.com/photo-1515676724626-c0290fe4cf6f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80)
-    center;
-  min-height: 60vh;
-}
-.hero-section img {
-  filter: brightness(0.6);
+  background: url(https://i.ibb.co/g7J60Mg/Vendez-votre-materiel-de-peche-des-maintenant.png)
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 50vh;
 }
 
 .hero-text {
