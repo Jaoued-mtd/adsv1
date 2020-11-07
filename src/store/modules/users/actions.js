@@ -1,5 +1,3 @@
-var myHeaders = new Headers();
-
 export default {
   // creer une user
   async createUser(context, payload) {
@@ -30,6 +28,7 @@ export default {
     context.commit("createUser", adData);
   },
   async loadUsers(context) {
+    var myHeaders = new Headers();
     myHeaders.append(
       "Authorization",
       `Bearer ${localStorage.getItem("token")}`
@@ -46,8 +45,6 @@ export default {
       throw error;
     }
     // const users = [];
-
-    console.log(responseData);
 
     // for (const key in responseData) {
     //   const user = {

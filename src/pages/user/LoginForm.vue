@@ -45,7 +45,11 @@
         </button>
       </div>
     </form>
-    <div class="social-media"></div>
+    <div class="social-media">
+      <router-link to="/register" class="blue btn p-2 m-2 text-light"
+        >Inscription<br
+      /></router-link>
+    </div>
   </div>
 </template>
 <script>

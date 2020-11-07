@@ -1,9 +1,9 @@
 let timer;
-var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
 
 export default {
   async register(context, payload) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
     const response = await fetch("http://localhost:1337/auth/local/register", {
       method: "POST",
       headers: myHeaders,
@@ -37,22 +37,13 @@ export default {
     }, expiresIn);
 
     context.commit("setUser", {
-      token: responseData.jwxt,
+      token: responseData.jwt,
       userId: responseData.user.id,
     });
-
-    // const userData = {
-    //   username: payload.username,
-    //   phone: payload.phone,
-    //   userId: responseData.localId,
-    //   email: payload.email,
-    // };
-    // console.log(userData);
-    // console.log(context);
-
-    // context.dispatch("users/createUser", userData);
   },
   async login(context, payload) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
     const response = await fetch("http://localhost:1337/auth/local", {
       method: "POST",
       headers: myHeaders,

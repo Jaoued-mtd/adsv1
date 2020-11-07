@@ -56,14 +56,18 @@
       </div>
       <div class="form-group">
         <button
-          type="button"
+          type="submit"
           class="btn btn-block font-weight-light create-account"
         >
           Creer votre compte
         </button>
       </div>
     </form>
-    <div class="social-media"></div>
+    <div class="social-media">
+      <router-link to="/login" class="blue btn p-2 m-2 text-light"
+        >Connexion<br
+      /></router-link>
+    </div>
   </div>
 </template>
 <script>
@@ -81,6 +85,8 @@ export default {
         username: this.username,
         phone: this.phone,
       };
+
+      console.log(formData);
 
       try {
         await this.$store.dispatch("register", formData);

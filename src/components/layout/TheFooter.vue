@@ -4,7 +4,7 @@
       <div
         class="d-flex justify-content-between align-items-center flex-column flex-md-row border-bottom pb-2"
       >
-        <h5 class="ml-0 ml-md-3 mb-0"><a href="#">Pechoux</a></h5>
+        <h5 class="ml-0 ml-md-3 mb-0"><a href="#">La bredouille</a></h5>
         <ul class="nav justify-content-center">
           <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Annonces</a></li>
@@ -27,7 +27,7 @@
         </div>
         <div class="d-flex mt-3 mt-md-0">
           <p class="mb-0 small text-muted">
-            © 2020 Pechoux. All right reserved.
+            © 2020 La bredouille. All right reserved.
           </p>
         </div>
       </div>

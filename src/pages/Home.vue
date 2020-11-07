@@ -8,13 +8,16 @@
       </div>
     </div>
     <AdsList number="3" />
+    <Brand />
   </div>
 </template>
 <script>
-import AdsList from "./ads/AdsList";
+import AdsList from "../components/ads/AdsList";
+import Brand from "../components/home/Brand";
 export default {
   components: {
     AdsList,
+    Brand,
   },
 };
 </script>
