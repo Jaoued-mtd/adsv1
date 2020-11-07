@@ -68,9 +68,6 @@ export default {
         categorie: this.categorie,
         price: this.price,
         userId: this.$store.state.userId,
-        username: this.userMe[0].username,
-        email: this.userMe[0].email,
-        phone: this.userMe[0].phone,
       };
       this.$emit("save-data", formData);
     },

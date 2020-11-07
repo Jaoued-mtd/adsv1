@@ -3,6 +3,7 @@
     <div class="navbar-brand ml-5">
       <img
         src="http://demo2.cmsmart.net/wordpress/fishing2/wp-content/uploads/2017/09/logo2.png"
+        style="width: 7rem"
       />
     </div>
     <button
@@ -36,10 +37,10 @@
             >Votre Espace</router-link
           >
           <router-link
-            class="nav-link text-uppercase text-dark mr-3 cursor"
+            class="btn btn-success text-light mr-3 cursor"
             to="/auth"
             v-if="!isLoggedIn"
-            >Connexion</router-link
+            >Connexion | S'inscrire</router-link
           >
         </li>
       </ul>

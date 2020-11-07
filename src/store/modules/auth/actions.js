@@ -1,18 +1,19 @@
 let timer;
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
 
 export default {
   async register(context, payload) {
-    const response = await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAO1M0LHJ9ixSHuJCm94HVu37UNbuZbGp8",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email: payload.email,
-          password: payload.password,
-          returnSecureToken: true,
-        }),
-      }
-    );
+    const response = await fetch("http://localhost:1337/auth/local/register", {
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify({
+        email: payload.email,
+        password: payload.password,
+        username: payload.username,
+        phone: payload.phone,
+      }),
+    });
 
     const responseData = await response.json();
 
@@ -27,8 +28,8 @@ export default {
     // const expiresIn = 5000;
     const expirationDate = new Date().getTime() + expiresIn;
 
-    localStorage.setItem("token", responseData.idToken);
-    localStorage.setItem("userId", responseData.localId);
+    localStorage.setItem("token", responseData.jwt);
+    localStorage.setItem("userId", responseData.user.id);
     localStorage.setItem("tokenExpiration", expirationDate);
 
     timer = setTimeout(function() {
@@ -36,33 +37,30 @@ export default {
     }, expiresIn);
 
     context.commit("setUser", {
-      token: responseData.idToken,
-      userId: responseData.localId,
+      token: responseData.jwxt,
+      userId: responseData.user.id,
     });
 
-    const userData = {
-      username: payload.username,
-      phone: payload.phone,
-      userId: responseData.localId,
-      email: payload.email,
-    };
-    console.log(userData);
-    console.log(context);
+    // const userData = {
+    //   username: payload.username,
+    //   phone: payload.phone,
+    //   userId: responseData.localId,
+    //   email: payload.email,
+    // };
+    // console.log(userData);
+    // console.log(context);
 
-    context.dispatch("users/createUser", userData);
+    // context.dispatch("users/createUser", userData);
   },
   async login(context, payload) {
-    const response = await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAO1M0LHJ9ixSHuJCm94HVu37UNbuZbGp8",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email: payload.email,
-          password: payload.password,
-          returnSecureToken: true,
-        }),
-      }
-    );
+    const response = await fetch("http://localhost:1337/auth/local", {
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify({
+        identifier: payload.email,
+        password: payload.password,
+      }),
+    });
 
     const responseData = await response.json();
 
@@ -75,37 +73,37 @@ export default {
       throw error;
     }
 
-    const expiresIn = +responseData.expiresIn * 1000;
-    // const expiresIn = 5000;
-    const expirationDate = new Date().getTime() + expiresIn;
+    // const expiresIn = +responseData.expiresIn * 1000;
+    // // const expiresIn = 5000;
+    // const expirationDate = new Date().getTime() + expiresIn;
 
-    localStorage.setItem("token", responseData.idToken);
-    localStorage.setItem("userId", responseData.localId);
-    localStorage.setItem("tokenExpiration", expirationDate);
+    localStorage.setItem("token", responseData.jwt);
+    localStorage.setItem("userId", responseData.user.id);
+    // localStorage.setItem("tokenExpiration", expirationDate);
 
-    timer = setTimeout(function() {
-      context.dispatch("autoLogout");
-    }, expiresIn);
+    // timer = setTimeout(function() {
+    //   context.dispatch("autoLogout");
+    // }, expiresIn);
 
     context.commit("setUser", {
-      token: responseData.idToken,
-      userId: responseData.localId,
+      token: responseData.jwt,
+      userId: responseData.user.id,
     });
   },
   tryLogin(context) {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
-    const tokenExpiration = localStorage.getItem("tokenExpiration");
+    // const tokenExpiration = localStorage.getItem("tokenExpiration");
 
-    const expiresIn = +tokenExpiration - new Date().getTime();
+    // const expiresIn = +tokenExpiration - new Date().getTime();
 
-    if (expiresIn < 0) {
-      return;
-    }
+    // if (expiresIn < 0) {
+    //   return;
+    // }
 
-    timer = setTimeout(function() {
-      context.dispatch("logout");
-    }, expiresIn);
+    // timer = setTimeout(function() {
+    //   context.dispatch("logout");
+    // }, expiresIn);
 
     if (token && userId) {
       context.commit("setUser", {
