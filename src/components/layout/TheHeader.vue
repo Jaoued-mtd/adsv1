@@ -33,63 +33,90 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item d-flex">
-          <router-link
-            class="nav-link text-uppercase text-dark mr-3 cursor"
-            to="/profil"
-            v-if="isLoggedIn"
-            >Mon Espace</router-link
-          >
-        </li>
-      </ul>
-      <span class="navbar-text mb-1 ml-5">
-        <router-link
-          class="btn blue text-light mr-3 cursor"
-          to="/login"
-          v-if="!isLoggedIn"
-          ><svg
-            width="1.5em"
-            height="1.5em"
-            viewBox="0 0 16 16"
-            class="bi bi-person-fill"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
-            /></svg
-          ><br />
-          Connexion</router-link
-        >
+    <div class="collapse navbar-collapse text-center" id="navbarText">
+      <div class="bg-light p-3 mobile">
+        <div v-for="link in links" :key="link">
+          <router-link class="text-dark" :to="link.to">{{
+            link.name
+          }}</router-link>
+        </div>
+      </div>
+      <div class="navbar-nav ml-auto">
         <BaseButton
-          @click="logout"
+          link
+          to="/profil"
           v-if="isLoggedIn"
-          mode="text-danger"
+          mode="blue mt-2"
           title=""
         >
           <svg
             width="1.5em"
             height="1.5em"
             viewBox="0 0 16 16"
-            class="bi bi-person-x-fill"
+            class="bi bi-person-circle"
             fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
+              d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"
+            />
+            <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+            <path
               fill-rule="evenodd"
-              d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"
+              d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
             />
           </svg>
           <br />
-          Deconnexion
+          Mon espace<br />client
         </BaseButton>
-      </span>
+
+        <span class="navbar-text ml-2">
+          <router-link
+            class="btn blue text-light mr-3 cursor"
+            to="/login"
+            v-if="!isLoggedIn"
+            ><svg
+              width="1.5em"
+              height="1.5em"
+              viewBox="0 0 16 16"
+              class="bi bi-person-fill"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+              /></svg
+            ><br />
+            Connexion</router-link
+          >
+          <BaseButton
+            @click="logout"
+            v-if="isLoggedIn"
+            mode="text-danger p-1"
+            title=""
+          >
+            <svg
+              width="1.5em"
+              height="1.5em"
+              viewBox="0 0 16 16"
+              class="bi bi-person-x-fill"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"
+              />
+            </svg>
+            <br />
+            Deconnexion
+          </BaseButton>
+        </span>
+      </div>
     </div>
   </nav>
-  <div class="bg-light p-3">
+  <div class="bg-light p-3 desktop">
     <div class="d-flex justify-content-between container">
       <div v-for="link in links" :key="link">
         <router-link class="text-dark" :to="link.to">{{
@@ -138,16 +165,36 @@ export default {
       search: "",
       links: [
         {
-          name: "Cannes",
+          name: "CANNES",
           to: "/annonces?search=canne",
         },
         {
-          name: "Moulinets",
+          name: "MOULINETS",
           to: "/annonces?search=moulinet",
         },
         {
-          name: "Leurres",
+          name: "LEURRES",
           to: "/annonces?search=leurre",
+        },
+        {
+          name: "FILS",
+          to: "/annonces?search=fils",
+        },
+        {
+          name: "MONTAGE-LIGNE",
+          to: "/annonces?search=montage",
+        },
+        {
+          name: "BAGAGERIE",
+          to: "/annonces?search=bagagerie",
+        },
+        {
+          name: "NAVIGATION",
+          to: "/annonces?search=navigation",
+        },
+        {
+          name: "VETEMENTS",
+          to: "/annonces?search=vetement",
         },
       ],
     };

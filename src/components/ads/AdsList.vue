@@ -100,7 +100,6 @@ export default {
 
   created() {
     this.loadAds();
-    console.log(this.$route.query.test);
   },
 };
 </script>

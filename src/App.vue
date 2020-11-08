@@ -2,7 +2,7 @@
   <div class="">
     <!-- Navigation  -->
     <TheHeader />
-    <router-view></router-view>
+    <router-view class="view"></router-view>
     <TheFooter />
   </div>
 </template>
@@ -44,5 +44,20 @@ export default {
 
 .blue-bg {
   background: #0098d4 !important;
+}
+
+.view {
+  min-height: 67vh;
+}
+
+@media screen and (max-width: 640px) {
+  .desktop {
+    display: none;
+  }
+}
+@media screen and (min-width: 640px) {
+  .mobile {
+    display: none;
+  }
 }
 </style>
