@@ -9,16 +9,36 @@
       :email="userMe.email"
       :phone="userMe.phone"
     />
-    <button class="btn blue-bg text-light text-center">
+    <button
+      @click="isSelected = 'AdsListByUser'"
+      class="btn blue-bg text-light text-center"
+    >
       Afficher mes annonces
     </button>
+    <button
+      @click="isSelected = 'UserEditForm'"
+      class="btn blue-bg text-light text-center ml-5"
+    >
+      Modifier mes informations
+    </button>
+
+    <component :is="isSelected"></component>
   </div>
 </template>
 <script>
+import UserEditForm from "../../components/user/UserEditForm";
 import ContactCard from "../../components/user/ContactCard";
+import AdsListByUser from "../../components/ads/AdListByUser";
 export default {
+  data() {
+    return {
+      isSelected: "AdsListByUser",
+    };
+  },
   components: {
     ContactCard,
+    AdsListByUser,
+    UserEditForm,
   },
   computed: {
     userMe() {

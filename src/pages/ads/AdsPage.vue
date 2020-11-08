@@ -1,5 +1,7 @@
 <template>
-  <AdsList />
+  <div class="Adspage">
+    <AdsList />
+  </div>
 </template>
 <script>
 import AdsList from "../../components/ads/AdsList";
@@ -9,3 +11,6 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+</style>

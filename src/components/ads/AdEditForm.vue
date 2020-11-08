@@ -8,7 +8,8 @@
           class="form-control"
           id="title"
           placeholder="Canne Mitchell à vendre.."
-          v-model.trim="title"
+          :value="title"
+          @input="titleUpdated = $event.target.value"
         />
       </div>
       <div class="form-group">
@@ -17,7 +18,8 @@
           rows="3"
           class="form-control"
           id="description"
-          v-model.trim="description"
+          :value="description"
+          @input="descriptionUpdated = $event.target.value"
           placeholder="Entrez votre description"
         >
         </textarea>
@@ -25,7 +27,12 @@
 
       <div class="form-group">
         <label for="categorie">Catégories</label>
-        <select class="form-control" id="categorie" v-model.trim="categorie">
+        <select
+          class="form-control"
+          id="categorie"
+          :value="categorie"
+          @input="categorieUpdated = $event.target.value"
+        >
           <option value="cannes">cannes</option>
           <option value="leurres">leurres</option>
           <option value="moulinets">moulinets</option>
@@ -38,11 +45,15 @@
           class="form-control"
           id="price"
           placeholder="20"
-          v-model.number="price"
+          :value="price"
+          @input="priceUpdated = $event.target.value"
         />
       </div>
       <button type="submit" class="btn blue-bg text-light btn-block">
-        Creer votre annonce
+        Modifier votre annonce
+      </button>
+      <button @click="cancel" class="btn btn-outline-danger btn-block">
+        Annuler
       </button>
     </form>
   </div>
@@ -50,13 +61,14 @@
 
 <script>
 export default {
-  emits: ["save-data"],
+  emits: ["save-data", "close"],
+  props: ["title", "description", "categorie", "price", "id", "userId"],
   data() {
     return {
-      title: "",
-      description: "",
-      categorie: "",
-      price: null,
+      titleUpdated: this.title,
+      descriptionUpdated: this.description,
+      categorieUpdated: this.categorie,
+      priceUpdated: this.price,
     };
   },
   computed: {
@@ -67,14 +79,19 @@ export default {
   methods: {
     submitForm() {
       const formData = {
-        title: this.title,
-        description: this.description,
-        categorie: this.categorie,
-        price: this.price,
-        userId: this.userMe.id,
+        title: this.titleUpdated,
+        description: this.descriptionUpdated,
+        categorie: this.categorieUpdated,
+        price: this.priceUpdated,
+        id: this.id,
+        userId: this.userId,
       };
+      console.log(formData);
 
       this.$emit("save-data", formData);
+    },
+    cancel() {
+      this.$emit("close");
     },
   },
 };
