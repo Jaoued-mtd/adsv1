@@ -19,8 +19,9 @@ export default {
   },
   created() {
     this.$store.dispatch("tryLogin");
-
-    this.$store.dispatch("users/loadUsers");
+    if (this.$store.state.auth.token) {
+      this.$store.dispatch("users/loadUsers");
+    }
   },
 };
 </script>

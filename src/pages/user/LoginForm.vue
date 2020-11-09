@@ -1,6 +1,9 @@
 <template>
   <div class="registration-form">
     <h2 class="text-center font-weight-light mb-5">Connexion</h2>
+    <p v-if="!formIsValid" class="text-center text-danger font-weight-bold">
+      Mot de passe ou email incorrect.
+    </p>
     <form @submit.prevent="submitForm">
       <div class="form-icon">
         <span
@@ -18,23 +21,31 @@
             /></svg
         ></span>
       </div>
-      <div class="form-group">
+      <div class="form-group" :class="{ invalid: !email.isValid }">
         <input
           type="email"
           id="email"
           class="form-control item"
           placeholder="Email"
-          v-model.trim="email"
+          v-model.trim="email.val"
+          @blur="clearValidity('email')"
         />
+        <p v-if="!email.isValid" class="invalid">
+          Merci de remplir le champ email.
+        </p>
       </div>
-      <div class="form-group">
+      <div class="form-group" :class="{ invalid: !password.isValid }">
         <input
           type="password"
           class="form-control item"
           id="password"
           placeholder="Mot de Passe"
-          v-model.trim="password"
+          v-model.trim="password.val"
+          @blur="clearValidity('password')"
         />
+        <p v-if="!password.isValid" class="invalid">
+          Merci de remplir le champ mot de passe.
+        </p>
       </div>
       <div class="form-group">
         <button
@@ -54,14 +65,46 @@
 </template>
 <script>
 export default {
-  email: "",
-  password: "",
+  data() {
+    return {
+      email: {
+        val: "",
+        isValid: true,
+      },
+      password: {
+        val: "",
+        isValid: true,
+      },
+      formIsValid: true,
+    };
+  },
 
   methods: {
+    clearValidity(input) {
+      this[input].isValid = true;
+    },
+    validateForm() {
+      this.formIsValid = true;
+
+      if (this.email.val === "") {
+        this.email.isValid = false;
+        this.formIsValid = false;
+      }
+      if (this.password.val === "") {
+        this.password.isValid = false;
+        this.formIsValid = false;
+      }
+    },
     async submitForm() {
+      this.validateForm();
+
+      if (!this.formIsValid) {
+        return;
+      }
+
       const formData = {
-        email: this.email,
-        password: this.password,
+        email: this.email.val,
+        password: this.password.val,
       };
 
       try {
@@ -69,8 +112,26 @@ export default {
         this.$router.replace("/profil");
       } catch (err) {
         console.log(err.message || "Failed to authenticate, try later.");
+        this.formIsValid = false;
       }
     },
   },
 };
 </script>
+
+<style scoped>
+.invalid label {
+  color: red;
+}
+
+.invalid p {
+  font-size: 0.8rem;
+  color: red;
+}
+
+.invalid input,
+.invalid textarea {
+  border: 1px solid red;
+}
+</style>
+

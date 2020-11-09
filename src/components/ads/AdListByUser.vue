@@ -1,46 +1,53 @@
 <template>
-  <div
-    v-for="ad in ads"
-    :key="ad.id"
-    class="card shadow mt-5"
-    style="border: none"
-  >
-    <div v-if="editMode">
-      <AdEditForm
-        @close="editMode = false"
-        @save-data="saveData"
-        :title="ad.title"
-        :price="ad.price"
-        :description="ad.description"
-        :categorie="ad.categorie"
-        :id="ad.id"
-        :userId="ad.users_permissions_user.id"
-      />
-    </div>
-    <div v-else class="row no-gutters">
-      <div class="col-sm-3">
-        <img
-          class="card-img ml-5"
-          src="https://img.pecheur.com/leurre-souple-arme-delalande-neo-shad-texan-11cm-z-1728-172808.jpg"
-          alt="Suresh Dasari Card"
-        />
-      </div>
-      <div class="col-sm-9">
-        <div class="card-body" v-if="!editMode">
-          <h5 class="card-title">{{ ad.title }}</h5>
-          <p class="card-text">
-            {{ ad.description }}
-          </p>
-          <p class="card-text">{{ ad.price }} €</p>
-          <button @click="editMode = true" class="btn blue-bg text-light">
-            Modifier
-          </button>
-          <button @click="deleteAd(ad.id)" class="btn btn-outline-danger ml-5">
-            Supprimer
-          </button>
+  <div v-if="!editMode">
+    <div
+      v-for="ad in ads"
+      :key="ad.id"
+      class="card shadow mt-5"
+      style="border: none"
+    >
+      <div class="row no-gutters">
+        <div class="col-sm-3">
+          <img
+            class="card-img ml-5"
+            src="https://img.pecheur.com/leurre-souple-arme-delalande-neo-shad-texan-11cm-z-1728-172808.jpg"
+            alt="Suresh Dasari Card"
+          />
+        </div>
+        <div class="col-sm-9">
+          <div class="card-body">
+            <h5 class="card-title">Titre : {{ ad.title }}</h5>
+            <p class="card-text">
+              Description :
+              {{ ad.description }}
+            </p>
+            <p class="card-text">Prix : {{ ad.price }} €</p>
+            <p class="card-text">Categorie : {{ ad.categorie }} €</p>
+            <button @click="turnEditMode(ad)" class="btn blue-bg text-light">
+              Modifier
+            </button>
+            <button
+              @click="deleteAd(ad.id)"
+              class="btn btn-outline-danger ml-5"
+            >
+              Supprimer
+            </button>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div v-else>
+    <AdEditForm
+      :title="adToEdit.title"
+      :price="adToEdit.price"
+      :description="adToEdit.description"
+      :categorie="adToEdit.categorie"
+      :id="adToEdit.id"
+      :userId="adToEdit.users_permissions_user.id"
+      @close="editMode = false"
+      @save-data="saveData"
+    />
   </div>
 </template>
 <script>
@@ -52,6 +59,7 @@ export default {
   data() {
     return {
       editMode: false,
+      adToEdit: null,
     };
   },
   computed: {
@@ -69,6 +77,10 @@ export default {
       } catch (error) {
         console.log(error.message || "Something went wrong!");
       }
+    },
+    turnEditMode(ad) {
+      this.adToEdit = ad;
+      this.editMode = true;
     },
     async deleteAd(id) {
       try {
