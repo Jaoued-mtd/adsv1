@@ -119,7 +119,7 @@
   <div class="bg-light p-3 desktop">
     <div class="d-flex justify-content-between container">
       <div v-for="link in links" :key="link">
-        <router-link class="text-dark" :to="link.to">{{
+        <router-link :class="link.mode" :to="link.to">{{
           link.name
         }}</router-link>
       </div>
@@ -167,34 +167,47 @@ export default {
         {
           name: "CANNES",
           to: "/annonces?search=canne",
+          mode: "text-dark",
         },
         {
           name: "MOULINETS",
           to: "/annonces?search=moulinet",
+          mode: "text-dark",
         },
         {
           name: "LEURRES",
           to: "/annonces?search=leurre",
+          mode: "text-dark",
         },
         {
           name: "FILS",
           to: "/annonces?search=fils",
+          mode: "text-dark",
         },
         {
           name: "MONTAGE-LIGNE",
           to: "/annonces?search=montage",
+          mode: "text-dark",
         },
         {
           name: "BAGAGERIE",
           to: "/annonces?search=bagagerie",
+          mode: "text-dark",
         },
         {
           name: "NAVIGATION",
           to: "/annonces?search=navigation",
+          mode: "text-dark",
         },
         {
           name: "VETEMENTS",
           to: "/annonces?search=vetement",
+          mode: "text-dark",
+        },
+        {
+          name: "ANNONCES",
+          to: "/annonces",
+          mode: "blue",
         },
       ],
     };
