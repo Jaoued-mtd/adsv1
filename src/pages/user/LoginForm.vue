@@ -48,6 +48,14 @@
         </p>
       </div>
       <div class="form-group">
+        <vue-recaptcha
+          ref="recaptcha"
+          @verify="onVerify"
+          sitekey="6Ld1feEZAAAAAF-YS5oHq6kBjNIHmJBIcedbmlAo"
+        >
+        </vue-recaptcha>
+      </div>
+      <div class="form-group">
         <button
           type="submit"
           class="btn btn-block font-weight-light create-account"
@@ -64,7 +72,11 @@
   </div>
 </template>
 <script>
+import VueRecaptcha from "vue-recaptcha";
 export default {
+  components: {
+    "vue-recaptcha": VueRecaptcha,
+  },
   data() {
     return {
       email: {
@@ -76,6 +88,7 @@ export default {
         isValid: true,
       },
       formIsValid: true,
+      robot: false,
     };
   },
 
@@ -102,18 +115,23 @@ export default {
         return;
       }
 
-      const formData = {
-        email: this.email.val,
-        password: this.password.val,
-      };
+      if (this.robot) {
+        const formData = {
+          email: this.email.val,
+          password: this.password.val,
+        };
 
-      try {
-        await this.$store.dispatch("login", formData);
-        this.$router.replace("/profil");
-      } catch (err) {
-        console.log(err);
-        this.formIsValid = false;
+        try {
+          await this.$store.dispatch("login", formData);
+          this.$router.replace("/profil");
+        } catch (err) {
+          console.log(err);
+          this.formIsValid = false;
+        }
       }
+    },
+    onVerify: function (response) {
+      if (response) this.form.robot = true;
     },
   },
 };
