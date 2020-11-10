@@ -29,10 +29,17 @@
           </table>
 
           <ContactCard
+            v-if="isLoggedIn"
             :username="ad[0].users_permissions_user.username"
             :email="ad[0].users_permissions_user.email"
             :phone="ad[0].users_permissions_user.phone"
           />
+          <div class="mt-5 text-center" v-else>
+            <p>Connectez-vous pour contacter le vendeur</p>
+            <router-link to="/login" class="blue-bg btn text-light"
+              >Se connecter</router-link
+            >
+          </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 mb-5 mb-lg-0">
           <img
@@ -42,7 +49,7 @@
             alt=""
             style="width: 30rem"
           />
-          <div class="d-flex justify-content-between w-100 mt-4">
+          <!-- <div class="d-flex justify-content-between w-100 mt-4">
             <div class="p-0">
               <img
                 class="w-100"
@@ -64,7 +71,7 @@
                 alt=""
               />
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -86,6 +93,10 @@ export default {
       return this.$store.getters["ads/ads"].filter(
         (ad) => ad.id == this.$route.params.id
       );
+    },
+
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
     },
   },
   methods: {

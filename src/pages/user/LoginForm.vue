@@ -119,20 +119,20 @@ export default {
         return;
       }
 
-      if (this.recaptcha) {
-        const formData = {
-          email: this.email.val,
-          password: this.password.val,
-        };
+      // if (this.recaptcha) {
+      const formData = {
+        email: this.email.val,
+        password: this.password.val,
+      };
 
-        try {
-          await this.$store.dispatch("login", formData);
-          this.$router.replace("/profil");
-        } catch (err) {
-          console.log(err);
-          this.formIsValid = false;
-        }
+      try {
+        await this.$store.dispatch("login", formData);
+        this.$router.replace("/profil");
+      } catch (err) {
+        console.log(err);
+        this.formIsValid = false;
       }
+      // }
     },
     mxVerify(response) {
       this.recaptcha = response;

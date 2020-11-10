@@ -2,7 +2,10 @@
   <div class="registration-form">
     <h2 class="text-center font-weight-light mb-5">Inscription</h2>
     <p v-if="!formIsValid" class="text-center text-danger font-weight-bold">
-      Merci de verifier vos informations
+      Merci de verifier vos informations.
+    </p>
+    <p v-if="emailTaken" class="text-center text-danger font-weight-bold">
+      L’adresse email saisie est déjà utilisée dans notre système
     </p>
     <form @submit.prevent="submitForm">
       <div class="form-icon">
@@ -110,6 +113,7 @@ export default {
         isValid: true,
       },
       formIsValid: true,
+      emailTaken: false,
     };
   },
 
@@ -156,7 +160,8 @@ export default {
         await this.$store.dispatch("register", formData);
         this.$router.replace("/profil");
       } catch (err) {
-        console.log(err.message || "Failed to authenticate, try later.");
+        this.emailTaken = true;
+        console.log(err || "Failed to authenticate, try later.");
       }
     },
   },
