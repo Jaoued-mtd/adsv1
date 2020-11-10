@@ -1,6 +1,9 @@
 <template>
   <div class="registration-form">
     <h2 class="text-center font-weight-light mb-5">Inscription</h2>
+    <p v-if="!formIsValid" class="text-center text-danger font-weight-bold">
+      Merci de verifier vos informations
+    </p>
     <form @submit.prevent="submitForm">
       <div class="form-icon">
         <span
@@ -18,41 +21,57 @@
             /></svg
         ></span>
       </div>
-      <div class="form-group">
+      <div class="form-group" :class="{ invalid: !username.isValid }">
         <input
           placeholder="Nom d'utilisateur"
           type="text"
           class="form-control item"
           id="username"
-          v-model.trim="username"
+          v-model.trim="username.val"
+          @blur="clearValidity('username')"
         />
+        <p v-if="!username.isValid" class="invalid">
+          Merci de remplir le champ username.
+        </p>
       </div>
-      <div class="form-group">
+      <div class="form-group" :class="{ invalid: !password.isValid }">
         <input
           type="password"
           class="form-control item"
           id="password"
           placeholder="Mot de Passe"
-          v-model.trim="password"
+          v-model.trim="password.val"
+          @blur="clearValidity('password')"
         />
+        <p v-if="!password.isValid" class="invalid">
+          Merci de remplir le champ mot de passe.
+        </p>
       </div>
-      <div class="form-group">
+      <div class="form-group" :class="{ invalid: !email.isValid }">
         <input
           type="email"
           id="email"
           class="form-control item"
           placeholder="Email"
-          v-model.trim="email"
+          v-model.trim="email.val"
+          @blur="clearValidity('email')"
         />
+        <p v-if="!email.isValid" class="invalid">
+          Merci de remplir le champ email.
+        </p>
       </div>
-      <div class="form-group">
+      <div class="form-group" :class="{ invalid: !email.isValid }">
         <input
           class="form-control item"
           type="tel"
           id="phone"
-          v-model.trim="phone"
+          v-model.trim="phone.val"
           placeholder="Numero de telephone"
+          @blur="clearValidity('phone')"
         />
+        <p v-if="!phone.isValid" class="invalid">
+          Merci de remplir le champ telephone.
+        </p>
       </div>
       <div class="form-group">
         <button
@@ -72,18 +91,63 @@
 </template>
 <script>
 export default {
-  email: "",
-  password: "",
-  username: "",
-  phone: "",
+  data() {
+    return {
+      email: {
+        val: "",
+        isValid: true,
+      },
+      password: {
+        val: "",
+        isValid: true,
+      },
+      username: {
+        val: "",
+        isValid: true,
+      },
+      phone: {
+        val: "",
+        isValid: true,
+      },
+      formIsValid: true,
+    };
+  },
 
   methods: {
+    clearValidity(input) {
+      this[input].isValid = true;
+    },
+    validateForm() {
+      this.formIsValid = true;
+
+      if (this.email.val === "") {
+        this.email.isValid = false;
+        this.formIsValid = false;
+      }
+      if (this.password.val === "") {
+        this.password.isValid = false;
+        this.formIsValid = false;
+      }
+      if (this.phone.val === "") {
+        this.phone.isValid = false;
+        this.formIsValid = false;
+      }
+      if (this.username.val === "") {
+        this.username.isValid = false;
+        this.formIsValid = false;
+      }
+    },
     async submitForm() {
+      this.validateForm();
+
+      if (!this.formIsValid) {
+        return;
+      }
       const formData = {
-        email: this.email,
-        password: this.password,
-        username: this.username,
-        phone: this.phone,
+        email: this.email.val,
+        password: this.password.val,
+        username: this.username.val,
+        phone: this.phone.val,
       };
 
       console.log(formData);

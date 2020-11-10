@@ -44,18 +44,6 @@ export default {
       const error = new Error(responseData.message || "Failed to fetch!");
       throw error;
     }
-    // const users = [];
-
-    // for (const key in responseData) {
-    //   const user = {
-    //     id: key,
-    //     username: responseData[key].username,
-    //     phone: responseData[key].phone,
-    //     userId: responseData[key].userId,
-    //     email: responseData[key].email,
-    //   };
-    //   users.push(user);
-    // }
 
     context.commit("setUsers", responseData);
   },

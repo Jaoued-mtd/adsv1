@@ -3,8 +3,11 @@ export default {
 
   async createAd(context, payload) {
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+
     myHeaders.append("Authorization", `Bearer ${context.rootGetters.token}`);
+
+    const myData = new FormData();
+
     const adData = {
       title: payload.title,
       description: payload.description,
@@ -13,9 +16,14 @@ export default {
       users_permissions_user: payload.userId,
     };
 
+    console.log(adData);
+
+    myData.append("data", JSON.stringify(adData));
+    myData.append("files.image", payload.image);
+
     const response = await fetch(`http://localhost:1337/ads`, {
       method: "POST",
-      body: JSON.stringify(adData),
+      body: myData,
       headers: myHeaders,
     });
 

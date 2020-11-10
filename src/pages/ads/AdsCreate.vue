@@ -12,8 +12,14 @@ export default {
     AdForm,
   },
   methods: {
-    saveData(data) {
-      this.$store.dispatch("ads/createAd", data);
+    async saveData(data) {
+      try {
+        await this.$store.dispatch("ads/createAd", data);
+        this.$router.replace("/profil");
+        this.loadAds();
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };

@@ -36,8 +36,9 @@
         </div>
         <div class="col-lg-6 order-1 order-lg-2 mb-5 mb-lg-0">
           <img
+            v-if="ad[0].image"
             class="img-fluid"
-            src="https://contents.mediadecathlon.com/p1767547/k$2284a75bc4fd4d91c3af1bd5a3baf4b1/sq/CANNE+P+CHE+AU+TOC+RIVERWAY+T500+3+90L.webp?f=1000x1000"
+            :src="'http://localhost:1337' + ad[0].image.url"
             alt=""
             style="width: 30rem"
           />

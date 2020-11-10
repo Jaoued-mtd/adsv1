@@ -8,6 +8,7 @@
       </div>
     </div>
     <AdsList number="3" />
+
     <Brand />
   </div>
 </template>
