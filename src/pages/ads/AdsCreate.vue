@@ -16,7 +16,6 @@ export default {
       try {
         await this.$store.dispatch("ads/createAd", data);
         this.$router.replace("/profil");
-        this.loadAds();
       } catch (err) {
         console.log(err);
       }

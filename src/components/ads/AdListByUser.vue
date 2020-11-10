@@ -6,13 +6,12 @@
       class="card shadow mt-5"
       style="border: none"
     >
-      {{ ad.image.url }}
       <div class="row no-gutters">
         <div class="col-sm-3">
           <img
             v-if="ad.image"
             class="card-img ml-5"
-            :src="'http://localhost:1337' + ad.image.url + '?rand=' + rand"
+            :src="'http://localhost:1337' + ad.image.url"
             alt="Suresh Dasari Card"
           />
         </div>
@@ -62,7 +61,6 @@ export default {
     return {
       editMode: false,
       adToEdit: null,
-      rand: 1,
     };
   },
   computed: {
@@ -105,7 +103,6 @@ export default {
   },
   created() {
     this.loadAds();
-    this.rand = Date.now();
   },
 };
 </script>

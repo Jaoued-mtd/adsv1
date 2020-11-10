@@ -7,7 +7,6 @@ export default {
   state() {
     return {
       ads: [],
-      adTitle: "Salut",
     };
   },
   mutations,
