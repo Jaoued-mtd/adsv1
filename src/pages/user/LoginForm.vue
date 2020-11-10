@@ -47,14 +47,18 @@
           Merci de remplir le champ mot de passe.
         </p>
       </div>
-      <div class="form-group">
-        <vue-recaptcha
-          ref="recaptcha"
-          @verify="onVerify"
-          sitekey="6Ld1feEZAAAAAF-YS5oHq6kBjNIHmJBIcedbmlAo"
-        >
-        </vue-recaptcha>
-      </div>
+
+      <!-- <div class="form-group row">
+        <label for="robot" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+          <vue-recaptcha
+            @verify="mxVerify"
+            sitekey="6LeffuEZAAAAANXjJ4ajReokA0MA2q_TYWSt2gcy"
+            :loadRecaptchaScript="true"
+          >
+          </vue-recaptcha>
+        </div>
+      </div> -->
       <div class="form-group">
         <button
           type="submit"
@@ -72,11 +76,11 @@
   </div>
 </template>
 <script>
-import VueRecaptcha from "vue-recaptcha";
+// import VueRecaptcha from "vue-recaptcha";
 export default {
-  components: {
-    "vue-recaptcha": VueRecaptcha,
-  },
+  // components: {
+  //   VueRecaptcha,
+  // },
   data() {
     return {
       email: {
@@ -88,7 +92,7 @@ export default {
         isValid: true,
       },
       formIsValid: true,
-      robot: false,
+      recaptcha: null,
     };
   },
 
@@ -115,7 +119,7 @@ export default {
         return;
       }
 
-      if (this.robot) {
+      if (this.recaptcha) {
         const formData = {
           email: this.email.val,
           password: this.password.val,
@@ -130,8 +134,8 @@ export default {
         }
       }
     },
-    onVerify: function (response) {
-      if (response) this.form.robot = true;
+    mxVerify(response) {
+      this.recaptcha = response;
     },
   },
 };
