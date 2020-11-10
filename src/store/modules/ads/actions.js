@@ -16,8 +16,6 @@ export default {
       users_permissions_user: payload.userId,
     };
 
-    console.log(adData);
-
     myData.append("data", JSON.stringify(adData));
     myData.append("files.image", payload.image);
 
@@ -35,6 +33,8 @@ export default {
       );
       throw error;
     }
+
+    adData.image = responseData.image;
 
     context.commit("createAd", adData);
   },
@@ -69,8 +69,11 @@ export default {
   },
   async updateAd(context, payload) {
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+
     myHeaders.append("Authorization", `Bearer ${context.rootGetters.token}`);
+
+    const myData = new FormData();
+
     const adData = {
       title: payload.title,
       description: payload.description,
@@ -78,14 +81,21 @@ export default {
       price: payload.price,
       users_permissions_user: payload.userId,
     };
+    myData.append("data", JSON.stringify(adData));
+
+    if (payload.image != null) {
+      myData.append("files.image", payload.image);
+    }
 
     const response = await fetch(`http://localhost:1337/ads/${payload.id}`, {
       method: "PUT",
-      body: JSON.stringify(adData),
+      body: myData,
       headers: myHeaders,
     });
 
     const responseData = await response.json();
+
+    adData.image = responseData.image;
 
     if (!response.ok) {
       const error = new Error(

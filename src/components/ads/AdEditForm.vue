@@ -1,7 +1,10 @@
 <template>
   <div class="container shadow p-5">
+    <p v-if="!formIsValid" class="text-center text-danger font-weight-bold">
+      Merci de verifier les informations
+    </p>
     <form class="m-5" @submit.prevent="submitForm">
-      <div class="form-group">
+      <div class="form-group" :class="{ invalid: !titleUpdated.isValid }">
         <label for="title">Titre</label>
         <input
           type="text"
@@ -9,36 +12,49 @@
           id="title"
           placeholder="Canne Mitchell à vendre.."
           :value="title"
-          @input="titleUpdated = $event.target.value"
+          @input="titleUpdated.val = $event.target.value"
+          @blur="clearValidity('titleUpdated')"
         />
+
+        <p v-if="!titleUpdated.isValid" class="invalid">
+          Merci de verifier le champ titre.
+        </p>
       </div>
-      <div class="form-group">
+      <div class="form-group" :class="{ invalid: !descriptionUpdated.isValid }">
         <label for="description">Description</label>
         <textarea
           rows="3"
           class="form-control"
           id="description"
           :value="description"
-          @input="descriptionUpdated = $event.target.value"
+          @input="descriptionUpdated.val = $event.target.value"
           placeholder="Entrez votre description"
+          @blur="clearValidity('descriptionUpdated')"
         >
+         <p v-if="!descriptionUpdated.isValid" class="invalid">
+          Merci de verifier le champ description.
+        </p>
         </textarea>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" :class="{ invalid: !categorieUpdated.isValid }">
         <label for="categorie">Catégories</label>
         <select
           class="form-control"
           id="categorie"
           :value="categorie"
-          @input="categorieUpdated = $event.target.value"
+          @input="categorieUpdated.val = $event.target.value"
+          @blur="clearValidity('categorieUpdated')"
         >
           <option value="cannes">cannes</option>
           <option value="leurres">leurres</option>
           <option value="moulinets">moulinets</option>
         </select>
+        <p v-if="!categorieUpdated.isValid" class="invalid">
+          Merci de selectionner une categorie.
+        </p>
       </div>
-      <div class="form-group">
+      <div class="form-group" :class="{ invalid: !priceUpdated.isValid }">
         <label for="price">Prix</label>
         <input
           type="number"
@@ -46,8 +62,19 @@
           id="price"
           placeholder="20"
           :value="price"
-          @input="priceUpdated = $event.target.value"
+          @input="priceUpdated.val = $event.target.value"
+          @blur="clearValidity('priceUpdated')"
         />
+      </div>
+      <p v-if="!priceUpdated.isValid" class="invalid">
+        Merci de verifier le champ prix.
+      </p>
+      <div class="form-group">
+        <label for="image">Ajouter une Image:</label>
+        <input type="file" class="m-1" id="image" @change="onFileChanged" />
+        <!-- <p v-if="!price.isValid" class="invalid">
+          Merci de verifier le champ prix.
+        </p> -->
       </div>
       <button type="submit" class="btn blue-bg text-light btn-block">
         Modifier votre annonce
@@ -65,10 +92,25 @@ export default {
   props: ["title", "description", "categorie", "price", "id", "userId"],
   data() {
     return {
-      titleUpdated: this.title,
-      descriptionUpdated: this.description,
-      categorieUpdated: this.categorie,
-      priceUpdated: this.price,
+      titleUpdated: {
+        val: this.title,
+        isValid: true,
+      },
+      descriptionUpdated: {
+        val: this.description,
+        isValid: true,
+      },
+      categorieUpdated: {
+        val: this.categorieUpdated,
+        isValid: true,
+      },
+      priceUpdated: {
+        val: this.price,
+        isValid: true,
+      },
+
+      selectedFile: null,
+      formIsValid: true,
     };
   },
   computed: {
@@ -77,16 +119,47 @@ export default {
     },
   },
   methods: {
+    clearValidity(input) {
+      this[input].isValid = true;
+    },
+    validateForm() {
+      this.formIsValid = true;
+
+      if (this.titleUpdated.val === "") {
+        this.titleUpdated.isValid = false;
+        this.formIsValid = false;
+      }
+      if (this.priceUpdated.val === "") {
+        this.priceUpdated.isValid = false;
+        this.formIsValid = false;
+      }
+      if (this.categorieUpdated.val === "") {
+        this.categorieUpdated.isValid = false;
+        this.formIsValid = false;
+      }
+      if (this.descriptionUpdated.val === "") {
+        this.descriptionUpdated.isValid = false;
+        this.formIsValid = false;
+      }
+    },
+    onFileChanged(event) {
+      this.selectedFile = event.target.files[0];
+    },
     submitForm() {
+      this.validateForm();
+
+      if (!this.formIsValid) {
+        return;
+      }
       const formData = {
-        title: this.titleUpdated,
-        description: this.descriptionUpdated,
-        categorie: this.categorieUpdated,
-        price: this.priceUpdated,
+        title: this.titleUpdated.val,
+        description: this.descriptionUpdated.val,
+        categorie: this.categorieUpdated.val,
+        price: this.priceUpdated.val,
         id: this.id,
         userId: this.userId,
+        image: this.selectedFile,
       };
-      console.log(formData);
 
       this.$emit("save-data", formData);
     },

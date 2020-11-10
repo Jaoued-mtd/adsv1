@@ -68,7 +68,7 @@
           Merci de remplir le champ prix.
         </p>
       </div>
-      <div class="form-group ">
+      <div class="form-group">
         <label for="image">Ajouter une Image:</label>
         <input type="file" class="m-1" id="image" @change="onFileChanged" />
         <!-- <p v-if="!price.isValid" class="invalid">
@@ -153,8 +153,6 @@ export default {
         userId: this.userMe.id,
         image: this.selectedFile,
       };
-
-      console.log(this.selectedFile);
 
       this.$emit("save-data", formData);
     },

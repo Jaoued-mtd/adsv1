@@ -1,32 +1,32 @@
 export default {
   // creer une user
-  async createUser(context, payload) {
-    const adData = {
-      username: payload.username,
-      phone: payload.phone,
-      userId: payload.userId,
-      email: payload.email,
-    };
+  // async createUser(context, payload) {
+  //   const adData = {
+  //     username: payload.username,
+  //     phone: payload.phone,
+  //     userId: payload.userId,
+  //     email: payload.email,
+  //   };
 
-    const response = await fetch(
-      `https://peche-app.firebaseio.com/users.json`,
-      {
-        method: "POST",
-        body: JSON.stringify(adData),
-      }
-    );
+  //   const response = await fetch(
+  //     `https://peche-app.firebaseio.com/users.json`,
+  //     {
+  //       method: "POST",
+  //       body: JSON.stringify(adData),
+  //     }
+  //   );
 
-    const responseData = await response.json();
+  //   const responseData = await response.json();
 
-    if (!response.ok) {
-      const error = new Error(
-        responseData.message || "Failed to send request."
-      );
-      throw error;
-    }
+  //   if (!response.ok) {
+  //     const error = new Error(
+  //       responseData.message || "Failed to send request."
+  //     );
+  //     throw error;
+  //   }
 
-    context.commit("createUser", adData);
-  },
+  //   context.commit("createUser", adData);
+  // },
   async loadUsers(context) {
     var myHeaders = new Headers();
     myHeaders.append(
@@ -46,5 +46,38 @@ export default {
     }
 
     context.commit("setUsers", responseData);
+  },
+
+  async updateUser(context, payload) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const adData = {
+      username: payload.username,
+      phone: payload.phone,
+      email: payload.email,
+    };
+
+    if (payload.password != null) {
+      adData.password = payload.password;
+    }
+
+    const response = await fetch(`http://localhost:1337/users/${payload.id}`, {
+      method: "PUT",
+      body: JSON.stringify(adData),
+      headers: myHeaders,
+    });
+
+    const responseData = await response.json();
+    localStorage.setItem("user", JSON.stringify(responseData));
+
+    if (!response.ok) {
+      const error = new Error(
+        responseData.message || "Failed to send request."
+      );
+      throw error;
+    }
+
+    context.commit("updateUser", adData);
   },
 };

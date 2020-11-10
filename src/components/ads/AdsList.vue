@@ -49,9 +49,7 @@
                 :price="ad.price"
                 :categorie="ad.categorie"
                 :username="ad.users_permissions_user.username"
-                :image="
-                  'http://localhost:1337' + ad.image.url + '?rand=' + rand
-                "
+                :image="'http://localhost:1337' + ad.image.url"
               />
             </div>
           </div>
@@ -75,7 +73,7 @@
           :price="ad.price"
           :categorie="ad.categorie"
           :username="ad.users_permissions_user.username"
-          :image="'http://localhost:1337' + ad.image.url + '?rand=' + rand"
+          :image="'http://localhost:1337' + ad.image.url"
         />
       </div>
     </div>
@@ -89,11 +87,7 @@ export default {
   components: {
     AdsItem,
   },
-  data() {
-    return {
-      rand: 1,
-    };
-  },
+
   computed: {
     ads() {
       if (this.$route.query.search) {
@@ -121,7 +115,6 @@ export default {
 
   created() {
     this.loadAds();
-    this.rand = Date.now();
   },
 };
 </script>

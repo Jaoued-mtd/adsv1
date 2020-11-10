@@ -21,8 +21,9 @@
     >
       Modifier mes informations
     </button>
-
-    <component :is="isSelected"></component>
+    <keep-alive>
+      <component :is="isSelected"></component>
+    </keep-alive>
   </div>
 </template>
 <script>
@@ -33,6 +34,11 @@ export default {
   data() {
     return {
       isSelected: "AdsListByUser",
+    };
+  },
+  provide() {
+    return {
+      user: this.userMe,
     };
   },
   components: {

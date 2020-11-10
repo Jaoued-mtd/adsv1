@@ -5,4 +5,8 @@ export default {
   setUsers(state, payload) {
     state.users = payload;
   },
+  updateUser(state, payload) {
+    console.log(state, payload);
+    state.users = payload;
+  },
 };
