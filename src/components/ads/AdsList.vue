@@ -33,6 +33,12 @@
         </div>
       </div>
       <div class="col-lg-9">
+        <div v-if="ads.length <= 0">
+          <p class="text-center p-5">
+            Victime de leur succès tous les articles sont vendus ! Merci de
+            revenir ultérieurement...
+          </p>
+        </div>
         <div class="grid container p-4">
           <div class="row">
             <div class="col-lg-4" v-for="ad in ads" :key="ad.id">
@@ -43,6 +49,9 @@
                 :price="ad.price"
                 :categorie="ad.categorie"
                 :username="ad.users_permissions_user.username"
+                :image="
+                  'http://localhost:1337' + ad.image.url + '?rand=' + rand
+                "
               />
             </div>
           </div>
@@ -53,6 +62,12 @@
   <div v-else class="grid container p-4">
     <div class="row">
       <div class="col-lg-4" v-for="ad in ads" :key="ad.id">
+        <div v-if="ads.length <= 0">
+          <p class="text-center p-5">
+            Victime de leur succès tous les articles sont vendus ! Merci de
+            revenir ultérieurement...
+          </p>
+        </div>
         <AdsItem
           :id="ad.id"
           :title="ad.title"
@@ -60,6 +75,7 @@
           :price="ad.price"
           :categorie="ad.categorie"
           :username="ad.users_permissions_user.username"
+          :image="'http://localhost:1337' + ad.image.url + '?rand=' + rand"
         />
       </div>
     </div>
@@ -72,6 +88,11 @@ export default {
   props: ["number"],
   components: {
     AdsItem,
+  },
+  data() {
+    return {
+      rand: 1,
+    };
   },
   computed: {
     ads() {
@@ -100,6 +121,7 @@ export default {
 
   created() {
     this.loadAds();
+    this.rand = Date.now();
   },
 };
 </script>

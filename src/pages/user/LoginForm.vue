@@ -111,7 +111,7 @@ export default {
         await this.$store.dispatch("login", formData);
         this.$router.replace("/profil");
       } catch (err) {
-        console.log(err.message || "Failed to authenticate, try later.");
+        console.log(err);
         this.formIsValid = false;
       }
     },
@@ -119,7 +119,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
 .invalid label {
   color: red;
 }

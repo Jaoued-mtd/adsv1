@@ -5,11 +5,8 @@
         <small class="text-muted"> {{ username }}</small>
       </p>
     </div>
-    <img
-      class="card-img-top"
-      src="https://img.pecheur.com/leurre-souple-arme-delalande-neo-shad-texan-11cm-z-1728-172808.jpg"
-      alt="Card image cap"
-    />
+
+    <img v-if="image" class="card-img-top" :src="image" alt="Card image cap" />
 
     <div class="card-body text-center">
       <div class="d-flex justify-content-between">
@@ -37,6 +34,7 @@ export default {
     "username",
     "phone",
     "email",
+    "image",
   ],
 };
 </script>

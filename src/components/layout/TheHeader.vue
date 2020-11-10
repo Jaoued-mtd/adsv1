@@ -1,4 +1,8 @@
 <template>
+  <p class="text-light p-2 text-center blue-bg" style="margin: 0">
+    Trouvez la bonne affaire parmi les ceintaines de petites annonces
+  </p>
+
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="navbar-brand ml-5">
       <router-link to="/" class="h4 blue mr-4">La Bredouille </router-link>

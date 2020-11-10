@@ -64,17 +64,8 @@ export default {
       throw error;
     }
 
-    // const expiresIn = +responseData.expiresIn * 1000;
-    // // const expiresIn = 5000;
-    // const expirationDate = new Date().getTime() + expiresIn;
-
     localStorage.setItem("token", responseData.jwt);
     localStorage.setItem("userId", responseData.user.id);
-    // localStorage.setItem("tokenExpiration", expirationDate);
-
-    // timer = setTimeout(function() {
-    //   context.dispatch("autoLogout");
-    // }, expiresIn);
 
     context.commit("setUser", {
       token: responseData.jwt,
