@@ -6,7 +6,12 @@
       </p>
     </div>
 
-    <img v-if="image" class="card-img-top" :src="image" alt="Card image cap" />
+    <img
+      v-if="image"
+      class="card-img-top image"
+      :src="image"
+      alt="Card image cap"
+    />
 
     <div class="card-body text-center">
       <div class="d-flex justify-content-between">
@@ -38,3 +43,10 @@ export default {
   ],
 };
 </script>
+
+<style scoped>
+.image {
+  height: 30vh;
+  object-fit: cover;
+}
+</style>

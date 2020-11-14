@@ -11,7 +11,7 @@
           <img
             v-if="ad.image"
             class="card-img ml-5"
-            :src="'http://localhost:1337' + ad.image.url"
+            :src="ad.image.url"
             alt="Suresh Dasari Card"
           />
         </div>
@@ -39,7 +39,9 @@
     </div>
   </div>
   <div v-else>
+    <BaseSpinner v-if="isLoading" />
     <AdEditForm
+      v-else
       :title="adToEdit.title"
       :price="adToEdit.price"
       :description="adToEdit.description"
@@ -61,6 +63,7 @@ export default {
     return {
       editMode: false,
       adToEdit: null,
+      isLoading: false,
     };
   },
   computed: {
@@ -73,10 +76,13 @@ export default {
   },
   methods: {
     async loadAds() {
+      this.isLoading = true;
       try {
         await this.$store.dispatch("ads/loadAds");
+        this.isLoading = false;
       } catch (error) {
         console.log(error.message || "Something went wrong!");
+        this.isLoading = false;
       }
     },
     turnEditMode(ad) {

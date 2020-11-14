@@ -25,7 +25,7 @@ export default {
 <style>
 .hero-section {
   background: url(https://i.ibb.co/g7J60Mg/Vendez-votre-materiel-de-peche-des-maintenant.png)
-    no-repeat center center fixed;
+    no-repeat center 2rem fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -36,5 +36,11 @@ export default {
 .hero-text {
   padding: 10rem;
   width: 70%;
+}
+
+@media screen and (max-width: 1100px) {
+  .hero-section {
+    display: none;
+  }
 }
 </style>

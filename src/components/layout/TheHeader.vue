@@ -1,6 +1,6 @@
 <template>
   <p class="text-light p-2 text-center blue-bg" style="margin: 0">
-    Trouvez la bonne affaire parmi les ceintaines de petites annonces
+    Trouvez la bonne affaire parmi les centaines de petites annonces
   </p>
 
   <nav class="navbar navbar-expand-lg navbar-light">
@@ -170,42 +170,42 @@ export default {
       links: [
         {
           name: "CANNES",
-          to: "/annonces?search=canne",
+          to: "/annonces?cat=cannes",
           mode: "text-dark",
         },
         {
           name: "MOULINETS",
-          to: "/annonces?search=moulinet",
+          to: "/annonces?cat=moulinets",
           mode: "text-dark",
         },
         {
           name: "LEURRES",
-          to: "/annonces?search=leurre",
+          to: "/annonces?cat=leurres",
           mode: "text-dark",
         },
         {
           name: "FILS",
-          to: "/annonces?search=fils",
+          to: "/annonces?cat=fils",
           mode: "text-dark",
         },
         {
           name: "MONTAGE-LIGNE",
-          to: "/annonces?search=montage",
+          to: "/annonces?cat=montages",
           mode: "text-dark",
         },
         {
           name: "BAGAGERIE",
-          to: "/annonces?search=bagagerie",
+          to: "/annonces?cat=bagageries",
           mode: "text-dark",
         },
         {
           name: "NAVIGATION",
-          to: "/annonces?search=navigation",
+          to: "/annonces?cat=navigations",
           mode: "text-dark",
         },
         {
           name: "VETEMENTS",
-          to: "/annonces?search=vetement",
+          to: "/annonces?cat=vetements",
           mode: "text-dark",
         },
         {

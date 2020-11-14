@@ -45,7 +45,7 @@
           <img
             v-if="ad[0].image"
             class="img-fluid"
-            :src="'http://localhost:1337' + ad[0].image.url"
+            :src="ad[0].image.url"
             alt=""
             style="width: 30rem"
           />
