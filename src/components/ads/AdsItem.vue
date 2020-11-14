@@ -49,4 +49,8 @@ export default {
   height: 30vh;
   object-fit: cover;
 }
+
+.card {
+  height: 50vh;
+}
 </style>
