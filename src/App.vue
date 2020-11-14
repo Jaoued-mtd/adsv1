@@ -51,12 +51,12 @@ export default {
   min-height: 67vh;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 900px) {
   .desktop {
     display: none;
   }
 }
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 900px) {
   .mobile {
     display: none;
   }

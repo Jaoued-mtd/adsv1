@@ -82,7 +82,7 @@
           class="invalid"
           style="color: red; font-size: 0.8rem"
         >
-          Merci de selectionner une image au format jpg.
+          Merci de selectionner une image au format jpeg, gif ou png.
         </p>
       </div>
       <button type="submit" class="btn blue-bg text-light btn-block">
@@ -134,6 +134,7 @@ export default {
     },
     validateForm() {
       this.formIsValid = true;
+      const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
 
       if (this.titleUpdated.val === "") {
         this.titleUpdated.isValid = false;
@@ -152,12 +153,10 @@ export default {
         this.formIsValid = false;
       }
       if (this.selectedFile !== null) {
-        if (
-          this.getExtension(this.selectedFile.name) !== "jpg"
-          // this.getExtension(this.selectedFile.name) !== "png" ||
-          // this.getExtension(this.selectedFile.name) !== "gif" ||
-          // this.getExtension(this.selectedFile.name) !== "bmp"
-        ) {
+        this.imageValid = false;
+        this.formIsValid = false;
+      } else {
+        if (!validImageTypes.includes(this.selectedFile.type)) {
           this.imageValid = false;
           this.formIsValid = false;
         }
@@ -166,10 +165,7 @@ export default {
     onFileChanged(event) {
       this.selectedFile = event.target.files[0];
     },
-    getExtension(filename) {
-      var parts = filename.split(".");
-      return parts[parts.length - 1];
-    },
+
     submitForm() {
       this.validateForm();
 
