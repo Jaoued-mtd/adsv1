@@ -33,7 +33,7 @@ export default {
       "Authorization",
       `Bearer ${localStorage.getItem("token")}`
     );
-    const response = await fetch(`http://localhost:1337/users/me`, {
+    const response = await fetch(`https://peche-api.herokuapp.com/users/me`, {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
@@ -62,11 +62,14 @@ export default {
       adData.password = payload.password;
     }
 
-    const response = await fetch(`http://localhost:1337/users/${payload.id}`, {
-      method: "PUT",
-      body: JSON.stringify(adData),
-      headers: myHeaders,
-    });
+    const response = await fetch(
+      `https://peche-api.herokuapp.com/users/${payload.id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(adData),
+        headers: myHeaders,
+      }
+    );
 
     const responseData = await response.json();
     localStorage.setItem("user", JSON.stringify(responseData));

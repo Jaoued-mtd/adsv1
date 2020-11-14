@@ -19,7 +19,7 @@ export default {
     myData.append("data", JSON.stringify(adData));
     myData.append("files.image", payload.image);
 
-    const response = await fetch(`http://localhost:1337/ads`, {
+    const response = await fetch(`https://peche-api.herokuapp.com/ads`, {
       method: "POST",
       body: myData,
       headers: myHeaders,
@@ -39,7 +39,7 @@ export default {
     context.commit("createAd", adData);
   },
   async loadAds(context) {
-    const response = await fetch(`http://localhost:1337/ads`);
+    const response = await fetch(`https://peche-api.herokuapp.com/ads`);
     const responseData = await response.json();
 
     if (!response.ok) {
@@ -55,7 +55,7 @@ export default {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", `Bearer ${context.rootGetters.token}`);
 
-    const response = await fetch(`http://localhost:1337/ads/${id}`, {
+    const response = await fetch(`https://peche-api.herokuapp.com/ads/${id}`, {
       method: "DELETE",
       headers: myHeaders,
     });
@@ -87,11 +87,14 @@ export default {
       myData.append("files.image", payload.image);
     }
 
-    const response = await fetch(`http://localhost:1337/ads/${payload.id}`, {
-      method: "PUT",
-      body: myData,
-      headers: myHeaders,
-    });
+    const response = await fetch(
+      `https://peche-api.herokuapp.com/ads/${payload.id}`,
+      {
+        method: "PUT",
+        body: myData,
+        headers: myHeaders,
+      }
+    );
 
     const responseData = await response.json();
 
