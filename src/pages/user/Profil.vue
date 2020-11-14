@@ -21,6 +21,7 @@
     >
       Modifier mes informations
     </button>
+
     <keep-alive>
       <component :is="isSelected"></component>
     </keep-alive>

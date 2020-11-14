@@ -7,6 +7,7 @@
     <p v-if="!formIsValid" class="text-center text-danger font-weight-bold">
       Merci de verifier vos informations
     </p>
+
     <p v-if="success" class="text-center text-success font-weight-bold">
       {{ success }}
     </p>
@@ -65,6 +66,13 @@
         <p v-if="!email.isValid" class="invalid">
           Merci de remplir le champ email.
         </p>
+        <p
+          v-if="emailExists"
+          class="invalid"
+          style="font-size: 0.8rem; color: red"
+        >
+          L’adresse email saisie est déjà utilisée dans notre système.
+        </p>
       </div>
       <div class="form-group" :class="{ invalid: !email.isValid }">
         <input
@@ -119,6 +127,7 @@ export default {
       },
       formIsValid: true,
       success: false,
+      emailExists: false,
     };
   },
 
@@ -167,7 +176,8 @@ export default {
           this.success = false;
         }, 2000);
       } catch (err) {
-        console.log(err.message || "Failed to authenticate, try later.");
+        this.emailExists = true;
+        this.formIsValid = false;
       }
     },
   },
