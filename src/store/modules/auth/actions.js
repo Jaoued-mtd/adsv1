@@ -4,16 +4,19 @@ export default {
   async register(context, payload) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    const response = await fetch("http://localhost:1337/auth/local/register", {
-      method: "POST",
-      headers: myHeaders,
-      body: JSON.stringify({
-        email: payload.email,
-        password: payload.password,
-        username: payload.username,
-        phone: payload.phone,
-      }),
-    });
+    const response = await fetch(
+      "https://peche-api.herokuapp.com/auth/local/register",
+      {
+        method: "POST",
+        headers: myHeaders,
+        body: JSON.stringify({
+          email: payload.email,
+          password: payload.password,
+          username: payload.username,
+          phone: payload.phone,
+        }),
+      }
+    );
 
     const responseData = await response.json();
 
@@ -45,7 +48,7 @@ export default {
   async login(context, payload) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    const response = await fetch("http://localhost:1337/auth/local", {
+    const response = await fetch("https://peche-api.herokuapp.com/auth/local", {
       method: "POST",
       headers: myHeaders,
       body: JSON.stringify({

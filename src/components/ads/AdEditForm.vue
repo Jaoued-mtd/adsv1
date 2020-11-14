@@ -46,9 +46,14 @@
           @input="categorieUpdated.val = $event.target.value"
           @blur="clearValidity('categorieUpdated')"
         >
-          <option value="cannes">cannes</option>
-          <option value="leurres">leurres</option>
-          <option value="moulinets">moulinets</option>
+          <option value="cannes">Cannes</option>
+          <option value="leurres">Leurres</option>
+          <option value="moulinets">Moulinets</option>
+          <option value="navigations">Navigations</option>
+          <option value="bagageries">Bagageries</option>
+          <option value="fils">Fils</option>
+          <option value="vetements">Vetements</option>
+          <option value="montages">Montage Ligne</option>
         </select>
         <p v-if="!categorieUpdated.isValid" class="invalid">
           Merci de selectionner une categorie.
@@ -72,9 +77,13 @@
       <div class="form-group">
         <label for="image">Ajouter une Image:</label>
         <input type="file" class="m-1" id="image" @change="onFileChanged" />
-        <!-- <p v-if="!price.isValid" class="invalid">
-          Merci de verifier le champ prix.
-        </p> -->
+        <p
+          v-if="!imageValid"
+          class="invalid"
+          style="color: red; font-size: 0.8rem"
+        >
+          Merci de selectionner une image au format jpg.
+        </p>
       </div>
       <button type="submit" class="btn blue-bg text-light btn-block">
         Modifier votre annonce
@@ -111,6 +120,7 @@ export default {
 
       selectedFile: null,
       formIsValid: true,
+      imageValid: true,
     };
   },
   computed: {
@@ -141,9 +151,24 @@ export default {
         this.descriptionUpdated.isValid = false;
         this.formIsValid = false;
       }
+      if (this.selectedFile !== null) {
+        if (
+          this.getExtension(this.selectedFile.name) !== "jpg"
+          // this.getExtension(this.selectedFile.name) !== "png" ||
+          // this.getExtension(this.selectedFile.name) !== "gif" ||
+          // this.getExtension(this.selectedFile.name) !== "bmp"
+        ) {
+          this.imageValid = false;
+          this.formIsValid = false;
+        }
+      }
     },
     onFileChanged(event) {
       this.selectedFile = event.target.files[0];
+    },
+    getExtension(filename) {
+      var parts = filename.split(".");
+      return parts[parts.length - 1];
     },
     submitForm() {
       this.validateForm();
@@ -151,6 +176,7 @@ export default {
       if (!this.formIsValid) {
         return;
       }
+
       const formData = {
         title: this.titleUpdated.val,
         description: this.descriptionUpdated.val,

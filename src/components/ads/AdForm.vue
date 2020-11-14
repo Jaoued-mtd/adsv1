@@ -46,9 +46,14 @@
           v-model.trim="categorie.val"
           @blur="clearValidity('categorie')"
         >
-          <option value="cannes">cannes</option>
-          <option value="leurres">leurres</option>
-          <option value="moulinets">moulinets</option>
+          <option value="cannes">Cannes</option>
+          <option value="leurres">Leurres</option>
+          <option value="moulinets">Moulinets</option>
+          <option value="navigations">Navigations</option>
+          <option value="bagageries">Bagageries</option>
+          <option value="fils">Fils</option>
+          <option value="vetements">Vetements</option>
+          <option value="montages">Montage Ligne</option>
         </select>
         <p v-if="!categorie.isValid" class="invalid">
           Merci de remplir le champ categorie.
@@ -71,9 +76,13 @@
       <div class="form-group">
         <label for="image">Ajouter une Image:</label>
         <input type="file" class="m-1" id="image" @change="onFileChanged" />
-        <!-- <p v-if="!price.isValid" class="invalid">
-          Merci de remplir le champ prix.
-        </p> -->
+        <p
+          v-if="!imageValid"
+          class="invalid"
+          style="color: red; font-size: 0.8rem"
+        >
+          Merci de selectionner une image image au format jpg.
+        </p>
       </div>
       <button type="submit" class="btn blue-bg text-light btn-block">
         Creer votre annonce
@@ -105,6 +114,8 @@ export default {
       },
       selectedFile: null,
       formIsValid: true,
+      imageValid: true,
+      isLoading: false,
     };
   },
   computed: {
@@ -138,13 +149,34 @@ export default {
         this.description.isValid = false;
         this.formIsValid = false;
       }
+
+      if (this.selectedFile === null) {
+        this.imageValid = false;
+        this.formIsValid = false;
+      } else {
+        if (
+          this.getExtension(this.selectedFile.name) !== "jpg"
+          // this.getExtension(this.selectedFile.name) !== "png" ||
+          // this.getExtension(this.selectedFile.name) !== "gif" ||
+          // this.getExtension(this.selectedFile.name) !== "bmp"
+        ) {
+          this.imageValid = false;
+          this.formIsValid = false;
+        }
+      }
+    },
+    getExtension(filename) {
+      var parts = filename.split(".");
+      return parts[parts.length - 1];
     },
     submitForm() {
       this.validateForm();
+      this.isLoading = true;
 
       if (!this.formIsValid) {
         return;
       }
+
       const formData = {
         title: this.title.val,
         description: this.description.val,
