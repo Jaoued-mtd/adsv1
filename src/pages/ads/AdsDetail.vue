@@ -49,29 +49,6 @@
             alt=""
             style="width: 30rem"
           />
-          <!-- <div class="d-flex justify-content-between w-100 mt-4">
-            <div class="p-0">
-              <img
-                class="w-100"
-                src="https://contents.mediadecathlon.com/p1767547/k$2284a75bc4fd4d91c3af1bd5a3baf4b1/sq/CANNE+P+CHE+AU+TOC+RIVERWAY+T500+3+90L.webp?f=1000x1000"
-                alt=""
-              />
-            </div>
-            <div class="p-0 mx-4">
-              <img
-                class="w-100"
-                src="https://contents.mediadecathlon.com/p1767427/k$09e9fca25f67f4fbc31d22b6ee224f5b/sq/CANNE+P+CHE+AU+TOC+RIVERWAY+T500+3+90L.webp?f=1000x1000"
-                alt=""
-              />
-            </div>
-            <div class="p-0">
-              <img
-                class="w-100"
-                src="https://contents.mediadecathlon.com/p1767515/k$8549e625d84e9a95fd4996c3497c4858/sq/CANNE+P+CHE+AU+TOC+RIVERWAY+T500+3+90L.webp?f=1000x1000"
-                alt=""
-              />
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
