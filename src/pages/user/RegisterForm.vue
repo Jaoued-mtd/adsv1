@@ -154,8 +154,6 @@ export default {
         phone: this.phone.val,
       };
 
-      console.log(formData);
-
       try {
         await this.$store.dispatch("register", formData);
         this.$router.replace("/profil");

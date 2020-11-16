@@ -6,7 +6,6 @@ export default {
     state.users = payload;
   },
   updateUser(state, payload) {
-    console.log(state, payload);
     state.users = payload;
   },
 };
