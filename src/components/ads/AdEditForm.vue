@@ -110,7 +110,7 @@ export default {
         isValid: true,
       },
       categorieUpdated: {
-        val: this.categorieUpdated,
+        val: this.categorie,
         isValid: true,
       },
       priceUpdated: {

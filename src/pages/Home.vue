@@ -38,7 +38,7 @@ export default {
   width: 70%;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1200px) {
   .hero-section {
     display: none;
   }
