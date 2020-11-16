@@ -180,6 +180,8 @@ export default {
         image: this.selectedFile,
       };
 
+      console.log(formData);
+
       this.$emit("save-data", formData);
     },
     cancel() {
